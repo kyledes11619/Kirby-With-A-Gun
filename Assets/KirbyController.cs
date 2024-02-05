@@ -8,16 +8,16 @@ using UnityEngine.UI;
 public class KirbyController : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float jumpPower = 5, walkPower = 5, inhalePower = 2, xInhaleRange, yInhaleRange;
+    public float jumpPower = 5, walkPower = 5, inhalePower = 2, knockbackPower = 1, xInhaleRange, yInhaleRange;
     public int jumps = 6;
     public bool jumping = false, facingLeft = false, inhaling = false;
-    public Transform inhalePoint;
-
-    public Image[] gunUI;
+    public Transform gunPoint;
+    public int health, maxHealth, score;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        RefreshAmmoUI();
     }
 
     void Update()
@@ -29,32 +29,80 @@ public class KirbyController : MonoBehaviour
             jumps--;
         }
         float x = Input.GetAxis("Horizontal");
-        if(x > 0) {
+        if(x != 0) {
             facingLeft = x < 0;
         }
-            rb.velocity = new Vector2(x * walkPower, doJump ? jumpPower : rb.velocity.y);
+        rb.velocity = new Vector2(x * walkPower, doJump ? jumpPower : rb.velocity.y);
         inhaling = Input.GetButton("Fire1");
         if(inhaling) {
-            Collider2D[] intersecting = Physics2D.OverlapCircleAll(transform.position, xInhaleRange);
+            Collider2D[] intersecting = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y - yInhaleRange/2), new Vector2(transform.position.x + (facingLeft ? -xInhaleRange : xInhaleRange), transform.position.y + yInhaleRange/2));
                 foreach(Collider2D c in intersecting) {
+                    Debug.Log("Inhhaling" + c.gameObject.name);
                     GameObject enemy = c.gameObject;
-                    if(enemy.CompareTag("enemy") && Math.Abs(enemy.transform.position.y - transform.position.y) < yInhaleRange)
-                        enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(enemy.transform.position.x - transform.position.x, enemy.transform.position.y - transform.position.y) * inhalePower);
+                    if(enemy.CompareTag("enemy"))
+                        enemy.GetComponent<Rigidbody2D>().AddForce((transform.position - enemy.transform.position) * inhalePower / (float)Math.Pow(Vector2.Distance(transform.position, enemy.transform.position), 2));
                 }
         }
-        if(Input.GetButton("Fire2")) {
-            Debug.Log("2");
+        if(Input.GetButtonDown("Fire2") && !ammo[currentAmmo].Equals(blank)) {
+            Instantiate(ammo[currentAmmo].projectile, gunPoint, false);
+            ammo[currentAmmo] = blank;
+            currentAmmo++;
+            if(currentAmmo == 6)
+                currentAmmo = 0;
+            gunUI[0].transform.Rotate(0, 0, -60);
+            //Animate the spinning?
+            RefreshAmmoUI();
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.collider.gameObject.CompareTag("ground")) {
+        GameObject ob = collision.collider.gameObject;
+        if(ob.CompareTag("ground")) {
             jumps = 6;
             jumping = false;
         }
-        if(collision.collider.gameObject.CompareTag("enemy")) {
-            if(inhaling)
-                Destroy(collision.collider.gameObject);
+        if(ob.CompareTag("enemy")) {
+            if(inhaling) {
+                if(ob.GetComponent<Enemy>().ammoOnKill != null)
+                    for(int i = 0; i < 6; i++)
+                        if(ammo[i + (currentAmmo >= 6 ? currentAmmo - 6 : currentAmmo)].Equals(blank))
+                            ammo[i] = ob.GetComponent<Enemy>().ammoOnKill;
+                ChangeScore(ob.GetComponent<Enemy>().scoreOnKill);
+                RefreshAmmoUI();
+                Destroy(ob);
+            }
+            else {
+                GetComponent<Rigidbody2D>().AddForce((transform.position - ob.transform.position) * knockbackPower);
+                ChangeHealth(-1);
+            }
+        }
+    }
+
+    public Image healthbar;
+    public Text scoreText;
+    
+    public void ChangeHealth(int i) {
+        health += i;
+        if(health > maxHealth)
+            health = maxHealth;
+        healthbar.fillAmount = health / maxHealth;
+    }
+
+    public void ChangeScore(int i) {
+        score += i;
+        scoreText.text = "" + i;
+    }
+
+    //List should start with parent then individual slots
+    public Image[] gunUI;
+    public AmmoType[] ammo;
+    public int currentAmmo;
+    public AmmoType blank;
+
+    public void RefreshAmmoUI() {
+        for(int i = 1; i < 7; i++) {
+            Debug.Log(i);
+            gunUI[i].sprite = ammo[i-1].uISymbol;
         }
     }
 }
