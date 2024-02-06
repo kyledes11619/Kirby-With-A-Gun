@@ -11,7 +11,9 @@ public class KirbyController : MonoBehaviour
     public float jumpPower = 5, walkPower = 5, inhalePower = 2, knockbackPower = 1, xInhaleRange, yInhaleRange;
     public int jumps = 6;
     public bool jumping = false, facingLeft = false, inhaling = false;
-    public Transform gunPoint;
+    public float reloadTime;
+    float reloadTimer;
+    public Transform gunPointL, gunPointR;
     public int health, maxHealth, score;
 
     void Start()
@@ -37,19 +39,25 @@ public class KirbyController : MonoBehaviour
         if(inhaling) {
             Collider2D[] intersecting = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y - yInhaleRange/2), new Vector2(transform.position.x + (facingLeft ? -xInhaleRange : xInhaleRange), transform.position.y + yInhaleRange/2));
                 foreach(Collider2D c in intersecting) {
-                    Debug.Log("Inhhaling" + c.gameObject.name);
                     GameObject enemy = c.gameObject;
                     if(enemy.CompareTag("enemy"))
                         enemy.GetComponent<Rigidbody2D>().AddForce((transform.position - enemy.transform.position) * inhalePower / (float)Math.Pow(Vector2.Distance(transform.position, enemy.transform.position), 2));
                 }
         }
-        if(Input.GetButtonDown("Fire2") && !ammo[currentAmmo].Equals(blank)) {
-            Instantiate(ammo[currentAmmo].projectile, gunPoint, false);
+        if(reloadTimer > 0) {
+            reloadTimer -= Time.deltaTime;
+            if(reloadTimer < 0)
+                reloadTimer = 0;
+            gunUI[0].transform.rotation = Quaternion.AngleAxis(currentAmmo * -60 + reloadTimer / reloadTime * 60, Vector3.forward);
+        }
+        else if(Input.GetButtonDown("Fire2") && !ammo[currentAmmo].Equals(blank)) {
+            reloadTimer += reloadTime;
+            GameObject bullet = Instantiate(ammo[currentAmmo].projectile, facingLeft ? gunPointL.position : gunPointR.position, facingLeft ? gunPointL.rotation : gunPointR.rotation);
+            bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * ammo[currentAmmo].shootForce);
             ammo[currentAmmo] = blank;
             currentAmmo++;
             if(currentAmmo == 6)
                 currentAmmo = 0;
-            gunUI[0].transform.Rotate(0, 0, -60);
             //Animate the spinning?
             RefreshAmmoUI();
         }
@@ -72,7 +80,7 @@ public class KirbyController : MonoBehaviour
                 Destroy(ob);
             }
             else {
-                GetComponent<Rigidbody2D>().AddForce((transform.position - ob.transform.position) * knockbackPower);
+                GetComponent<Rigidbody2D>().AddForce((transform.position - ob.transform.position) * -knockbackPower);
                 ChangeHealth(-1);
             }
         }
@@ -85,7 +93,7 @@ public class KirbyController : MonoBehaviour
         health += i;
         if(health > maxHealth)
             health = maxHealth;
-        healthbar.fillAmount = health / maxHealth;
+        healthbar.fillAmount = (float)health / maxHealth;
     }
 
     public void ChangeScore(int i) {
@@ -93,7 +101,6 @@ public class KirbyController : MonoBehaviour
         scoreText.text = "" + i;
     }
 
-    //List should start with parent then individual slots
     public Image[] gunUI;
     public AmmoType[] ammo;
     public int currentAmmo;
@@ -101,7 +108,6 @@ public class KirbyController : MonoBehaviour
 
     public void RefreshAmmoUI() {
         for(int i = 1; i < 7; i++) {
-            Debug.Log(i);
             gunUI[i].sprite = ammo[i-1].uISymbol;
         }
     }

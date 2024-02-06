@@ -138,3 +138,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreOnKill: 100
   ammoOnKill: {fileID: 11400000, guid: 00556290c728a21479ecd56c763777c1, type: 2}
+  diesToBullets: 0
+  deathParticles: {fileID: 0}

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 7058188245610428637, guid: b8dce8b083f65874ea10889c7eefede0, type: 3}
   uISymbol: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
+  shootForce: 1000

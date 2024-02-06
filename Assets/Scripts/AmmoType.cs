@@ -7,4 +7,5 @@ public class AmmoType : ScriptableObject
 {
     public GameObject projectile;
     public Sprite uISymbol;
+    public float shootForce;
 }
