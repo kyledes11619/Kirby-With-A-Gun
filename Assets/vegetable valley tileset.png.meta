@@ -66,8 +66,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 512
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -3084,11 +3084,11 @@ TextureImporter:
       vegetable valley tileset_105: 1017921823
       vegetable valley tileset_72: -981308047
       vegetable valley tileset_1: 777841030
-      vegetable valley tileset_3: -961707886
-      vegetable valley tileset_20: 1937655947
-      vegetable valley tileset_86: -746743684
-      vegetable valley tileset_56: -1309000313
       vegetable valley tileset_117: 588261686
+      vegetable valley tileset_86: -746743684
+      vegetable valley tileset_20: 1937655947
+      vegetable valley tileset_3: -961707886
+      vegetable valley tileset_56: -1309000313
       vegetable valley tileset_35: -1526583244
       vegetable valley tileset_122: 1647231490
       vegetable valley tileset_50: -1622645083
