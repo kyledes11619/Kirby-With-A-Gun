@@ -11,8 +11,8 @@ public class KirbyController : MonoBehaviour
     public float jumpPower = 5, walkPower = 5, inhalePower = 2, knockbackPower = 1, xInhaleRange, yInhaleRange;
     public int jumps = 6;
     public bool jumping = false, facingLeft = false, inhaling = false;
-    public float reloadTime;
-    float reloadTimer;
+    public float reloadTime, invincibleTimeAfterHit = .5f;
+    float reloadTimer, hitInvTimer;
     public Transform gunPointL, gunPointR;
     public int health, maxHealth, score;
 
@@ -24,6 +24,8 @@ public class KirbyController : MonoBehaviour
 
     void Update()
     {
+        if(hitInvTimer > 0)
+            hitInvTimer-=Time.deltaTime;
         bool doJump = false;
         if(Input.GetButtonDown("Jump") && jumps > 0) {
             jumping = true;
@@ -90,7 +92,11 @@ public class KirbyController : MonoBehaviour
     public Text scoreText;
     
     public void ChangeHealth(int i) {
+        if(i < 0 && hitInvTimer > 0)
+            return;
         health += i;
+        if(i < 0)
+            hitInvTimer+=invincibleTimeAfterHit;
         if(health > maxHealth)
             health = maxHealth;
         healthbar.fillAmount = (float)health / maxHealth;

@@ -897,9 +897,12 @@ MonoBehaviour:
   scoreOnKill: 100
   ammoOnKill: {fileID: 11400000, guid: 00556290c728a21479ecd56c763777c1, type: 2}
   diesToBullets: 1
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 5870799143163174617, guid: a5972ac2ccc30f04db82c679e3f4b883, type: 3}
   bounceTime: 1.5
   bounceForce: 5
+  shockDelay: 0.5
+  shockRange: 2
+  shockForce: 5
 --- !u!58 &759194635
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1965,6 +1968,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kirby
       objectReference: {fileID: 0}
+    - target: {fileID: 449572041041678954, guid: a163932ef7be5084ab84146ed6d1ff28, type: 3}
+      propertyPath: m_TagString
+      value: kirby
+      objectReference: {fileID: 0}
     - target: {fileID: 449572041041678965, guid: a163932ef7be5084ab84146ed6d1ff28, type: 3}
       propertyPath: gunPointL
       value: 
@@ -2202,7 +2209,7 @@ MonoBehaviour:
   scoreOnKill: 100
   ammoOnKill: {fileID: 11400000, guid: 00556290c728a21479ecd56c763777c1, type: 2}
   diesToBullets: 1
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 5870799143163174617, guid: a5972ac2ccc30f04db82c679e3f4b883, type: 3}
   movingLeft: 1
   turnAroundTime: 3
   walkForce: 0.25
