@@ -8,6 +8,7 @@ public class BouncingEnemy : Enemy
     public float bounceTime, bounceForce, shockDelay, shockRange, shockForce;
     float bounceTimer;
     bool shocked;
+    public GameObject particlesForAttack;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +24,7 @@ public class BouncingEnemy : Enemy
             rb.velocity = new Vector2(0, bounceForce);
         }
         if(!shocked && bounceTimer <= bounceTime - shockDelay) {
+            Instantiate(particlesForAttack, transform.position, transform.rotation);
             shocked = true;
             Collider2D[] intersecting = Physics2D.OverlapCircleAll(transform.position, shockRange);
                 foreach(Collider2D c in intersecting) {
