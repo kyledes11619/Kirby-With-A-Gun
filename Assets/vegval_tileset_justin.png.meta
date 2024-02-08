@@ -44,10 +44,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 14
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -3260,8 +3260,8 @@ TextureImporter:
       vegval_tileset_justin_105: 1656391502
       vegval_tileset_justin_124: -256131606
       vegval_tileset_justin_140: 1221961855
-      vegval_tileset_justin_133: -343814499
       vegval_tileset_justin_144: -212517333
+      vegval_tileset_justin_133: -343814499
       vegval_tileset_justin_142: 1483449932
       vegval_tileset_justin_12: -1179064050
       vegval_tileset_justin_132: 1760141618
