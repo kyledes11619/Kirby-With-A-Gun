@@ -37,7 +37,7 @@ public class KirbyController : MonoBehaviour
             doJump = true;
             jumps--;
         }
-        float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal") * currentlySlowed ? walkPower/2 : walkPower;
+        float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal") * (currentlySlowed ? walkPower/2 : walkPower);
         animator.SetFloat("Speed", x);
         if(x != 0) {
             facingLeft = x < 0;
