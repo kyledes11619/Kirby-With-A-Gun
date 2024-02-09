@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class WhispyWoods : MonoBehaviour
 {
-    public CinemachineBrain cinemachine;
-    public GameObject bossFightCamerafocus;
+    public CinemachineVirtualCamera cinemachine;
+    public Transform bossFightCamerafocus;
     public int startingHealth;
     int health;
     public GameObject bossBar;
@@ -71,11 +71,12 @@ public class WhispyWoods : MonoBehaviour
             StartFight();
         health--;
         bossBarFill.fillAmount = (float)health/startingHealth;
-        //if(health <= 0);
+        //if(health <= 0)
         //win
     }
 
     public void StartFight() {
+        cinemachine.m_Follow = bossFightCamerafocus;
         bossBar.SetActive(true);
         fightStarted = true;
         attackPhase = true;
