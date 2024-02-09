@@ -46,7 +46,8 @@ public class WhispyWoods : MonoBehaviour
             if(attackPhase) {
                 transform.position = new Vector3(transform.position.x, faceYLow + Mathf.PingPong(Time.time * faceSpeed, faceYHigh - faceYLow), transform.position.z);
                 if(attackCooldown <= 0) {
-                    Instantiate(attackProjectile, attackPoint.transform.position, attackPoint.transform.rotation);
+                    GameObject bullet = Instantiate(attackProjectile, attackPoint.transform.position, attackPoint.transform.rotation);
+                    bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * 1000);
                     attackCooldown = attackSpeed;
                 }
             } else {
@@ -60,7 +61,7 @@ public class WhispyWoods : MonoBehaviour
                         spawnedApples[j] = true;
                         Instantiate(applesToDrop[Random.Range(0, applesToDrop.Length)], appleSpawns[j]);
                     }
-                    attackCooldown = attackSpeed;
+                    attackCooldown = appleSpeed;
                 }
             }
         }
@@ -70,7 +71,7 @@ public class WhispyWoods : MonoBehaviour
         if(!fightStarted)
             StartFight();
         health--;
-        bossBarFill.fillAmount = (float)health/startingHealth;
+        bossBarFill.fillAmount = ((float)health)/startingHealth;
         //if(health <= 0)
         //win
     }
