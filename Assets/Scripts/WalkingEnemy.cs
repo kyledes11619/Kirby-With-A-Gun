@@ -18,16 +18,12 @@ public class WalkingEnemy : Enemy
 
     void Update()
     {
-        if(currentlyStunned) {
-            animator.SetFloat("Speed", 0);
-            return;
-        }
         turnTimer -= Time.deltaTime;
         if(turnTimer <= 0) {
             turnTimer = turnAroundTime;
             movingLeft = !movingLeft;
         }
-        rb.AddForce(new Vector2(walkForce * (movingLeft ? -1 : 1) * (currentlySlowed ? .25 : 1), 0));
+        rb.AddForce(new Vector2(walkForce * (movingLeft ? -1 : 1), 0));
         animator.SetFloat("Speed", rb.velocity.x);
     }
 }
