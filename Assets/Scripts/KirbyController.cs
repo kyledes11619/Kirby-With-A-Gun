@@ -37,12 +37,12 @@ public class KirbyController : MonoBehaviour
             doJump = true;
             jumps--;
         }
-        float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal");
-        animator.SetFloat("Speed", x * walkPower);
+        float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal") * currentlySlowed ? walkPower/2 : walkPower;
+        animator.SetFloat("Speed", x);
         if(x != 0) {
             facingLeft = x < 0;
         }
-        rb.velocity = new Vector2(x * walkPower, doJump ? jumpPower : rb.velocity.y);
+        rb.velocity = new Vector2(x, doJump ? jumpPower : rb.velocity.y);
         inhaling = Input.GetButton("Fire1");
         if(inhaling) {
             Collider2D[] intersecting = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y - yInhaleRange/2), new Vector2(transform.position.x + (facingLeft ? -xInhaleRange : xInhaleRange), transform.position.y + yInhaleRange/2));

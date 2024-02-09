@@ -9,6 +9,8 @@ public class BouncingEnemy : Enemy
     float bounceTimer;
     bool shocked;
     public GameObject particlesForAttack;
+    public bool stunKirbyOnDamage, slowKirbyOnDamage;
+    public float kirbyEffectTime;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +33,14 @@ public class BouncingEnemy : Enemy
                     GameObject kirby = c.gameObject;
                     if(kirby.CompareTag("kirby")) {
                         kirby.GetComponent<Rigidbody2D>().velocity = -(transform.position - kirby.transform.position) * shockForce / (float)System.Math.Pow(Vector2.Distance(transform.position, kirby.transform.position), 2);
+                        if(stunKirbyOnDamage) {
+                            kirby.GetComponent<KirbyController>().currentlyStunned = true;
+                            kirby.GetComponent<KirbyController>().stunTime = kirbyEffectTime;
+                        }
+                        if(slowKirbyOnDamage) {
+                            kirby.GetComponent<KirbyController>().currentlySlowed = true;
+                            kirby.GetComponent<KirbyController>().slowTime = kirbyEffectTime;
+                        }
                         kirby.GetComponent<KirbyController>().ChangeHealth(-1);
                     }
                 }
