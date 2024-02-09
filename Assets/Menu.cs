@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Level_Scene");
     }
 
     public void HowToPlay()
