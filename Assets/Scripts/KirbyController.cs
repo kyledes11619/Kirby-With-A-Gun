@@ -17,12 +17,13 @@ public class KirbyController : MonoBehaviour
     public int health, maxHealth, score;
     public bool currentlyStunned, currentlySlowed;
     public float stunTime, slowTime;
-    public float animSpeed;
     float statusCooldown;
+    Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         RefreshAmmoUI();
     }
 
@@ -31,14 +32,14 @@ public class KirbyController : MonoBehaviour
         if(hitInvTimer > 0)
             hitInvTimer-=Time.deltaTime;
         bool doJump = false;
-        if(Input.GetButtonDown("Jump") && jumps > 0 && currentlyStunned) {
+        if(Input.GetButtonDown("Jump") && jumps > 0 && !currentlyStunned) {
             jumping = true;
             doJump = true;
             jumps--;
         }
         float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal");
+        animator.SetFloat("Speed", x * walkPower);
         if(x != 0) {
-            animSpeed = x * walkPower;
             facingLeft = x < 0;
         }
         rb.velocity = new Vector2(x * walkPower, doJump ? jumpPower : rb.velocity.y);

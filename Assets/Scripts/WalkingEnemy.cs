@@ -8,9 +8,11 @@ public class WalkingEnemy : Enemy
     public bool movingLeft = true;
     public float turnAroundTime, walkForce, animSpeed;
     float turnTimer;
+    Animator animator;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         turnTimer = turnAroundTime;
     }
 
@@ -22,6 +24,6 @@ public class WalkingEnemy : Enemy
             movingLeft = !movingLeft;
         }
         rb.AddForce(new Vector2(walkForce * (movingLeft ? -1 : 1), 0));
-        animSpeed = rb.velocity.x;
+        animator.SetFloat("Speed", rb.velocity.x);
     }
 }

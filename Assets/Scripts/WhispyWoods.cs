@@ -21,8 +21,10 @@ public class WhispyWoods : MonoBehaviour
     public Transform attackPoint;
     public Transform[] appleSpawns;
     bool[] spawnedApples = {false, false, false, false};
+    public float faceY, faceYHigh, faceYLow, faceSpeed;
 
     void Start() {
+        transform.position = new Vector3(transform.position.x, faceY, transform.position.z);
         health = startingHealth;
     }
 
@@ -35,14 +37,27 @@ public class WhispyWoods : MonoBehaviour
                 attackPhase = !attackPhase;
                 attackCooldown = attackPhase ? attackSpeed : appleSpeed;
                 phaseTimer = attackPhase ? attackPhaseLength : applePhaseLength;
-                if(!attackPhase)
+                if(!attackPhase) {
+                    transform.position = new Vector3(transform.position.x, faceY, transform.position.z);
                     for(int i = 0; i < 4; i++)
                         spawnedApples[i] = false;
+                }
             }
             if(attackPhase) {
+                transform.position = new Vector3(transform.position.x, faceYLow + Mathf.PingPong(Time.time * faceSpeed, faceYHigh - faceYLow), transform.position.z);
                 if(attackCooldown <= 0) {
                     Instantiate(attackProjectile, attackPoint.transform.position, attackPoint.transform.rotation);
                     attackCooldown = attackSpeed;
+                }
+            } else {
+                if(attackCooldown <= 0) {
+                    int i = Random.Range(0, 3), j = Random.Range(0, 3);
+                    if(!spawnedApples[i]) {
+                        spawnedApples[i] = true;
+                    }
+                    else if(!spawnedApples[j]) {
+                        spawnedApples[j] = true;
+                    }
                 }
             }
         }
