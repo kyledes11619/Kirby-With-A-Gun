@@ -15,6 +15,10 @@ public class KirbyController : MonoBehaviour
     float reloadTimer, hitInvTimer;
     public Transform gunPointL, gunPointR;
     public int health, maxHealth, score;
+    public bool currentlyStunned, currentlySlowed;
+    public float stunTime, slowTime;
+    public float animSpeed;
+    float statusCooldown;
 
     void Start()
     {
@@ -27,13 +31,14 @@ public class KirbyController : MonoBehaviour
         if(hitInvTimer > 0)
             hitInvTimer-=Time.deltaTime;
         bool doJump = false;
-        if(Input.GetButtonDown("Jump") && jumps > 0) {
+        if(Input.GetButtonDown("Jump") && jumps > 0 && currentlyStunned) {
             jumping = true;
             doJump = true;
             jumps--;
         }
-        float x = Input.GetAxis("Horizontal");
+        float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal");
         if(x != 0) {
+            animSpeed = x * walkPower;
             facingLeft = x < 0;
         }
         rb.velocity = new Vector2(x * walkPower, doJump ? jumpPower : rb.velocity.y);
@@ -60,7 +65,13 @@ public class KirbyController : MonoBehaviour
             currentAmmo++;
             if(currentAmmo == 6)
                 currentAmmo = 0;
-            //Animate the spinning?
+            RefreshAmmoUI();
+        }
+        else if(Input.GetButtonDown("Fire3") && !ammo[currentAmmo].Equals(blank)) {
+            reloadTimer += reloadTime;
+            currentAmmo++;
+            if(currentAmmo == 6)
+                currentAmmo = 0;
             RefreshAmmoUI();
         }
     }

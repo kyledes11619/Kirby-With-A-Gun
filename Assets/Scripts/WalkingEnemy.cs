@@ -6,7 +6,7 @@ public class WalkingEnemy : Enemy
 {
     Rigidbody2D rb;
     public bool movingLeft = true;
-    public float turnAroundTime, walkForce;
+    public float turnAroundTime, walkForce, animSpeed;
     float turnTimer;
 
     void Start() {
@@ -22,5 +22,6 @@ public class WalkingEnemy : Enemy
             movingLeft = !movingLeft;
         }
         rb.AddForce(new Vector2(walkForce * (movingLeft ? -1 : 1), 0));
+        animSpeed = rb.velocity.x;
     }
 }

@@ -9,4 +9,5 @@ public class Enemy : MonoBehaviour
     public AmmoType ammoOnKill;
     public bool diesToBullets;
     public GameObject deathParticles;
+    public bool dealsDamage = true;
 }

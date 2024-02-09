@@ -12,6 +12,9 @@ public class Bullet : MonoBehaviour
                 Destroy(ob);
             }   
         }
+        if(ob.CompareTag("whispy")) {
+            ob.GetComponent<WhispyWoods>().DealDamage();
+        }
         Destroy(gameObject);
     }
 }
