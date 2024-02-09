@@ -54,10 +54,13 @@ public class WhispyWoods : MonoBehaviour
                     int i = Random.Range(0, 3), j = Random.Range(0, 3);
                     if(!spawnedApples[i]) {
                         spawnedApples[i] = true;
+                        Instantiate(applesToDrop[Random.Range(0, applesToDrop.Length)], appleSpawns[i]);
                     }
                     else if(!spawnedApples[j]) {
                         spawnedApples[j] = true;
+                        Instantiate(applesToDrop[Random.Range(0, applesToDrop.Length)], appleSpawns[j]);
                     }
+                    attackCooldown = attackSpeed;
                 }
             }
         }
@@ -68,6 +71,8 @@ public class WhispyWoods : MonoBehaviour
             StartFight();
         health--;
         bossBarFill.fillAmount = (float)health/startingHealth;
+        //if(health <= 0);
+        //win
     }
 
     public void StartFight() {
