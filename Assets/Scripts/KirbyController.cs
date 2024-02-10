@@ -35,10 +35,11 @@ public class KirbyController : MonoBehaviour
         if(Input.GetButtonDown("Jump") && jumps > 0 && !currentlyStunned) {
             jumping = true;
             doJump = true;
+            animator.SetTrigger("Jumping");
             jumps--;
         }
         float x = currentlyStunned ? 0 : Input.GetAxis("Horizontal") * (currentlySlowed ? walkPower/2 : walkPower);
-        animator.SetFloat("Speed", x);
+        animator.SetFloat("Speed", Math.Abs(x));
         if(x != 0) {
             facingLeft = x < 0;
         }
@@ -82,6 +83,7 @@ public class KirbyController : MonoBehaviour
         if(ob.CompareTag("ground")) {
             jumps = 6;
             jumping = false;
+            animator.SetTrigger("Land");
         }
         if(ob.CompareTag("enemy")) {
             if(inhaling) {
