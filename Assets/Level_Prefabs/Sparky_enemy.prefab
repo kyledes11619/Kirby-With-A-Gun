@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495867266130961171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.05, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ MonoBehaviour:
   shockDelay: 4
   shockRange: 4
   shockForce: 4
-  particlesForAttack: {fileID: 0}
+  particlesForAttack: {fileID: 5870799143163174617, guid: 8f77349a410af304a9a8e1ae85ef6293, type: 3}
   stunKirbyOnDamage: 1
   slowKirbyOnDamage: 0
   kirbyEffectTime: 3
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &495867266130961173
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Blank Ammo
   m_EditorClassIdentifier: 
   projectile: {fileID: 0}
-  uISymbol: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
+  uISymbol: {fileID: 21300000, guid: 28bd7c0799b900c44877e6648de03f10, type: 3}
+  shootForce: 0

@@ -16,12 +16,7 @@ public class LeftMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        spriteRenderer.flipX = body.velocity.x < 0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(body.velocity.x != 0)
+            spriteRenderer.flipX = body.velocity.x < 0f;
     }
 }
