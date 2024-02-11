@@ -46,6 +46,7 @@ public class KirbyController : MonoBehaviour
         rb.velocity = new Vector2(x, doJump ? jumpPower : rb.velocity.y);
         inhaling = Input.GetButton("Fire1");
         if(inhaling) {
+            animator.SetBool("isInhaling", true);
             Collider2D[] intersecting = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y - yInhaleRange/2), new Vector2(transform.position.x + (facingLeft ? -xInhaleRange : xInhaleRange), transform.position.y + yInhaleRange/2));
                 foreach(Collider2D c in intersecting) {
                     GameObject enemy = c.gameObject;
@@ -53,7 +54,9 @@ public class KirbyController : MonoBehaviour
                         enemy.GetComponent<Rigidbody2D>().AddForce((transform.position - enemy.transform.position) * inhalePower / (float)Math.Pow(Vector2.Distance(transform.position, enemy.transform.position), 2));
                 }
         }
-        if(reloadTimer > 0) {
+        else animator.SetBool("isInhaling", false);
+
+        if (reloadTimer > 0) {
             reloadTimer -= Time.deltaTime;
             if(reloadTimer < 0)
                 reloadTimer = 0;
