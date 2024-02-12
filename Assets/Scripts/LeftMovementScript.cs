@@ -16,7 +16,7 @@ public class LeftMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(body.velocity.x != 0)
+        if(Mathf.Abs(body.velocity.x) > .2)
             spriteRenderer.flipX = body.velocity.x < 0f;
     }
 }

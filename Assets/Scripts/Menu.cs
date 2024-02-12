@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public bool Invincibility = false;
 
     public void QuitButton()
     {
@@ -33,16 +33,17 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Options");
     }
 
-    public void ButtonOn()
-    {
-        Invincibility = true;
-        Debug.Log("Invincibility: On");
-    }
+    public Image inv;
+    public Sprite invOn, invOff;
 
-    public void ButtonOff()
+    public void Invincibility()
     {
-        Invincibility = false;
-        Debug.Log("Invincibility: Off");
+        KirbyController.invincibile = !KirbyController.invincibile;
+        inv.sprite = KirbyController.invincibile ? invOn : invOff; 
+    }    
+
+    void Start() {
+        if(inv != null)
+            inv.sprite = KirbyController.invincibile ? invOn : invOff; 
     }
-    
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WhispyWoods : MonoBehaviour
@@ -72,11 +73,12 @@ public class WhispyWoods : MonoBehaviour
             StartFight();
         health--;
         bossBarFill.fillAmount = ((float)health)/startingHealth;
-        //if(health <= 0)
-        //win
+        if(health <= 0)
+            SceneManager.LoadScene("Win");
     }
 
     public void StartFight() {
+        KirbyController.bossCheckpoint = true;
         cinemachine.m_Follow = bossFightCamerafocus;
         bossBar.SetActive(true);
         fightStarted = true;

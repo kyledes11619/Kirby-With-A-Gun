@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KirbyController : MonoBehaviour
 {
@@ -17,18 +18,41 @@ public class KirbyController : MonoBehaviour
     public int health, maxHealth, score;
     public bool currentlyStunned, currentlySlowed;
     public float stunTime, slowTime;
-    float statusCooldown;
     Animator animator;
+
+    public Text livesCounter;
+    public static int lives = 3;
+    public static bool bossCheckpoint;
+    public Vector3 bossRespawn;
+    public static bool invincibile;
+    public AudioSource reloadSrc, inhaleSrc;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         RefreshAmmoUI();
+        if(lives <= 0) {
+            lives = 3;
+            bossCheckpoint = false;
+        }
+        else if(bossCheckpoint)
+            transform.position = bossRespawn;
+        livesCounter.text = "" + lives;
     }
 
     void Update()
     {
+        if(currentlyStunned) {
+            stunTime -= Time.deltaTime;
+            if(stunTime <= 0)
+                currentlyStunned = false;
+        }
+        if(currentlySlowed) {
+            slowTime -= Time.deltaTime;
+            if(slowTime <= 0)
+                currentlySlowed = false;
+        }
         if(hitInvTimer > 0)
             hitInvTimer-=Time.deltaTime;
         bool doJump = false;
@@ -46,6 +70,8 @@ public class KirbyController : MonoBehaviour
         rb.velocity = new Vector2(x, doJump ? jumpPower : rb.velocity.y);
         inhaling = Input.GetButton("Fire1");
         if(inhaling) {
+            if(!inhaleSrc.isPlaying)
+                inhaleSrc.Play();
             animator.SetBool("isInhaling", true);
             Collider2D[] intersecting = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y - yInhaleRange/2), new Vector2(transform.position.x + (facingLeft ? -xInhaleRange : xInhaleRange), transform.position.y + yInhaleRange/2));
                 foreach(Collider2D c in intersecting) {
@@ -54,7 +80,11 @@ public class KirbyController : MonoBehaviour
                         enemy.GetComponent<Rigidbody2D>().AddForce((transform.position - enemy.transform.position) * inhalePower / (float)Math.Pow(Vector2.Distance(transform.position, enemy.transform.position), 2));
                 }
         }
-        else animator.SetBool("isInhaling", false);
+        else {
+            if(inhaleSrc.isPlaying)
+                inhaleSrc.Stop();
+            animator.SetBool("isInhaling", false);
+        }
 
         if (reloadTimer > 0) {
             reloadTimer -= Time.deltaTime;
@@ -63,6 +93,7 @@ public class KirbyController : MonoBehaviour
             gunUI[0].transform.rotation = Quaternion.AngleAxis(currentAmmo * -60 + reloadTimer / reloadTime * 60, Vector3.forward);
         }
         else if(Input.GetButtonDown("Fire2") && !ammo[currentAmmo].Equals(blank)) {
+            reloadSrc.Play();
             reloadTimer += reloadTime;
             GameObject bullet = Instantiate(ammo[currentAmmo].projectile, facingLeft ? gunPointL.position : gunPointR.position, facingLeft ? gunPointL.rotation : gunPointR.rotation);
             bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * ammo[currentAmmo].shootForce);
@@ -72,7 +103,8 @@ public class KirbyController : MonoBehaviour
                 currentAmmo = 0;
             RefreshAmmoUI();
         }
-        else if(Input.GetButtonDown("Fire3") && !ammo[currentAmmo].Equals(blank)) {
+        else if(Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3")) {
+            reloadSrc.Play();
             reloadTimer += reloadTime;
             currentAmmo++;
             if(currentAmmo == 6)
@@ -92,7 +124,7 @@ public class KirbyController : MonoBehaviour
             if(inhaling) {
                 if(ob.GetComponent<Enemy>().ammoOnKill != null)
                     for(int i = 0; i < 6; i++)
-                        if(ammo[i + (currentAmmo >= 6 ? currentAmmo - 6 : currentAmmo)].Equals(blank))
+                        if(ammo[i].Equals(blank))
                             ammo[i] = ob.GetComponent<Enemy>().ammoOnKill;
                 ChangeScore(ob.GetComponent<Enemy>().scoreOnKill);
                 RefreshAmmoUI();
@@ -109,7 +141,7 @@ public class KirbyController : MonoBehaviour
     public Text scoreText;
     
     public void ChangeHealth(int i) {
-        if(i < 0 && hitInvTimer > 0)
+        if(invincibile || i < 0 && hitInvTimer > 0)
             return;
         health += i;
         if(i < 0)
@@ -117,6 +149,14 @@ public class KirbyController : MonoBehaviour
         if(health > maxHealth)
             health = maxHealth;
         healthbar.fillAmount = (float)health / maxHealth;
+        if(health <= 0) {
+            if(lives > 0) {
+                lives--;
+                SceneManager.LoadScene("Level_Scene");
+            }
+            else
+                SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void ChangeScore(int i) {

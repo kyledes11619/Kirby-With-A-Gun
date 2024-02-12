@@ -6,7 +6,7 @@ public class WalkingEnemy : Enemy
 {
     Rigidbody2D rb;
     public bool movingLeft = true;
-    public float turnAroundTime, walkForce, animSpeed;
+    public float turnAroundTime, walkForce;
     float turnTimer;
     Animator animator;
 

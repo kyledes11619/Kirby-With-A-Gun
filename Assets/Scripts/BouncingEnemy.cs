@@ -11,6 +11,7 @@ public class BouncingEnemy : Enemy
     public GameObject particlesForAttack;
     public bool stunKirbyOnDamage, slowKirbyOnDamage;
     public float kirbyEffectTime;
+    public AudioSource src;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +29,8 @@ public class BouncingEnemy : Enemy
         if(!shocked && bounceTimer <= bounceTime - shockDelay) {
             Instantiate(particlesForAttack, transform.position, transform.rotation);
             shocked = true;
+            if(src != null)
+                src.Play();
             Collider2D[] intersecting = Physics2D.OverlapCircleAll(transform.position, shockRange);
                 foreach(Collider2D c in intersecting) {
                     GameObject kirby = c.gameObject;
