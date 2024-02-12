@@ -145,7 +145,7 @@ MonoBehaviour:
   dealsDamage: 1
   movingLeft: 1
   turnAroundTime: 3
-  walkForce: 1
+  walkForce: 5
 --- !u!95 &5542499880266551834
 Animator:
   serializedVersion: 4

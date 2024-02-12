@@ -39,6 +39,7 @@ public class KirbyController : MonoBehaviour
         else if(bossCheckpoint)
             transform.position = bossRespawn;
         livesCounter.text = "" + lives;
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -161,7 +162,7 @@ public class KirbyController : MonoBehaviour
 
     public void ChangeScore(int i) {
         score += i;
-        scoreText.text = "" + i;
+        scoreText.text = "" + score;
     }
 
     public Image[] gunUI;

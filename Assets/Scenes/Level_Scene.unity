@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -380,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -10791,7 +10791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -11283,6 +11283,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waddle_Dee (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: walkForce
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
 --- !u!1001 &469651136
@@ -11614,6 +11622,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waddle_Dee (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: walkForce
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
 --- !u!1001 &519284048
@@ -11673,7 +11689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -12065,10 +12081,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85544496}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1000697182}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: Unpause
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12362,7 +12378,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: turnAroundTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -12376,6 +12400,10 @@ PrefabInstance:
     - target: {fileID: 449572041041678954, guid: a163932ef7be5084ab84146ed6d1ff28, type: 3}
       propertyPath: m_Name
       value: Kirby
+      objectReference: {fileID: 0}
+    - target: {fileID: 449572041041678954, guid: a163932ef7be5084ab84146ed6d1ff28, type: 3}
+      propertyPath: m_TagString
+      value: kirby
       objectReference: {fileID: 0}
     - target: {fileID: 449572041041678964, guid: a163932ef7be5084ab84146ed6d1ff28, type: 3}
       propertyPath: m_Radius
@@ -12743,7 +12771,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11379111, y: 0}
+  m_Offset: {x: 0.11379111, y: -0.25483876}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12754,7 +12782,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33241773, y: 1}
+  m_Size: {x: 0.33241773, y: 1.5096759}
   m_EdgeRadius: 0
 --- !u!1001 &682633510
 PrefabInstance:
@@ -12813,7 +12841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -12931,7 +12959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: turnAroundTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -13207,7 +13239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -13294,9 +13330,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010936642}
+      - m_Target: {fileID: 1644105783}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13398,6 +13434,18 @@ PrefabInstance:
     - target: {fileID: 5542499880266551836, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: m_Name
       value: Waddle_Dee (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: walkForce
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: turnAroundTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -13539,7 +13587,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 0
 --- !u!222 &811710726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13740,7 +13788,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: turnAroundTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -14049,6 +14101,7 @@ GameObject:
   - component: {fileID: 1000697180}
   - component: {fileID: 1000697179}
   - component: {fileID: 1000697178}
+  - component: {fileID: 1000697182}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -14145,6 +14198,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1000697182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000697177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a111401afbdb214aa47423f67bde00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1644105778}
 --- !u!1 &1009176121
 GameObject:
   m_ObjectHideFlags: 0
@@ -14648,7 +14714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -138002,7 +138068,6 @@ GameObject:
   - component: {fileID: 1644105779}
   - component: {fileID: 1644105782}
   - component: {fileID: 1644105781}
-  - component: {fileID: 1644105780}
   - component: {fileID: 1644105783}
   m_Layer: 5
   m_Name: pauseMenu
@@ -138038,19 +138103,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1058.5542, y: 508.98}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1644105780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644105778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a111401afbdb214aa47423f67bde00e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1644105778}
 --- !u!114 &1644105781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138837,6 +138889,18 @@ PrefabInstance:
     - target: {fileID: 5542499880266551836, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: m_Name
       value: Waddle_Dee (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: walkForce
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: movingLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
+      propertyPath: turnAroundTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -139630,7 +139694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
@@ -139779,7 +139843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542499880266551837, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
       propertyPath: walkForce
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5542499880266551838, guid: 2a4a43c24330c7c42927ae6a2053c747, type: 3}
